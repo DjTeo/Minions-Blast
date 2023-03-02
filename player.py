@@ -2,11 +2,9 @@ import pygame
 from pygame.rect import Rect
 from cosntants import *
 
-
 class Player():
 
     def __init__(self, game, image, x, y, size, playerNum):
-        self.game = game
         self.gameWidth = game.GAME_WIDTH
         self.gameHeight = game.GAME_HEIGHT
         self.image = image
@@ -21,10 +19,24 @@ class Player():
         self.jumping = False
         self.playerNum = playerNum
         self.deathTime = -1
-        self.jumpSound = self.game.PrepareSound("jump.wav",0.8)
-        self.pickupSound = self.game.PrepareSound("pickup.wav",0.9)
-        self.bombSound = self.game.PrepareSound("bomb.wav")
+        self.jumpSound = game.PrepareSound("jump.wav",0.8)
+        self.pickupSound = game.PrepareSound("pickup.wav",0.9)
+        self.bombSound = game.PrepareSound("bomb.wav")
 
+    def map_network(self,player):
+        self.offsetY = player.offsetY
+        self.rect.x = player.x
+        self.rect.y = player.y
+        self.lifes = player.lifes
+        self.score = player.score
+        self.speed = player.speed
+        self.jumpHeight = player.jumpHeight
+        self.y_gravity = player.y_gravity
+        self.y_velocity = self.y_velocity
+        self.jumping = player.jumping
+        self.playerNum = player.playerNum
+        self.deathTime = player.deathTime
+        
     def render(self, display: pygame.Surface):
         display.blit(self.image, (self.rect.x, self.rect.y - self.offsetY))
         # pygame.draw.rect(display, BLACK, self.rect, 1)  # for debug purposes

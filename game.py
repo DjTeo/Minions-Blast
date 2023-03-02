@@ -18,14 +18,14 @@ class Game():
 
         # calculate screen resolution
         display_info = pygame.display.Info()
-        ratio = self.GAME_WIDTH / self.GAME_HEIGHT
+        self.ratio = self.GAME_WIDTH / self.GAME_HEIGHT
         if display_info.current_w < self.GAME_WIDTH:
             screenWidth = display_info.current_w
         elif display_info.current_w >= self.GAME_WIDTH * 2:
             screenWidth = display_info.current_w / 2
         else:
             screenWidth = display_info.current_w / 1.5
-        screenHeight = screenWidth / ratio
+        screenHeight = screenWidth / self.ratio
 
         # set game resolution
         self.game_canvas = pygame.Surface((self.GAME_WIDTH, self.GAME_HEIGHT))
@@ -71,6 +71,8 @@ class Game():
 
     def get_events(self):
         for event in pygame.event.get():
+            # if event.type == pygame.VIDEORESIZE:
+            #     self.screen = pygame.display.set_mode((event.w, event.w / self.ratio),flags=pygame.RESIZABLE)
             self.state_stack[-1].handle_event(event)
             if event.type == pygame.QUIT:
                 self.running = False
@@ -153,7 +155,9 @@ class Game():
         ratio_y = (self.screen.get_height() / self.GAME_HEIGHT)
         posX = pos[0] / ratio_x
         posY = pos[1] / ratio_y
+
         return posX, posY               
+
 
     def update(self):
         try:

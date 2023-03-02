@@ -1,6 +1,7 @@
 from states.state import State
 from states.game_world import GameWorld
 from states.highscores import Highscores
+from states.multiplayer_menu import MultiplayerMenu
 from cosntants import *
 from pygame.rect import Rect
 import pygame
@@ -68,7 +69,7 @@ class MainMenu(State):
                 new_state = GameWorld(self.game)
                 new_state.enter_state()
             elif self.start_mp_RECT.collidepoint(mouse_pos):
-                new_state = GameWorld(self.game, True)
+                new_state = MultiplayerMenu(self.game)
                 new_state.enter_state()
             elif self.highscores_RECT.collidepoint(mouse_pos):
                 new_state = Highscores(self.game)

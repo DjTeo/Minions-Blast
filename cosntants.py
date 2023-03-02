@@ -14,6 +14,7 @@ NAVY_BLUE = (0, 0, 128)
 OLIVE = (128, 128, 0)
 PURPLE = (128, 0, 128)
 RED = (255, 0, 0)
+ORANGE = (255, 128, 0)
 SILVER = (192, 192, 192)
 SKY_BLUE = (135, 205, 235)
 TEAL = (0, 128, 128)
@@ -31,6 +32,7 @@ button_dark = (100, 100, 100)
 
 INPUT_INACTIVE = (100, 100, 100)
 INPUT_ACTIVE = BLACK
+
 
 # item's size
 item_size = (100, 100)

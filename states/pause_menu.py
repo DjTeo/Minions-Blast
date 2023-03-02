@@ -2,7 +2,6 @@ import pygame, os
 from states.state import State
 from cosntants import *
 
-
 class PauseMenu(State):
 
     def __init__(self, game):

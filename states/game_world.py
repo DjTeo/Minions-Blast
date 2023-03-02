@@ -10,12 +10,14 @@ from random import randint
 
 class GameWorld(State):
 
-    def __init__(self, game, multiplayer=False):
+    def __init__(self, game, multiplayer=False, online=False):
         State.__init__(self, game)
         self.game.multiplayer = multiplayer
+        self.online = online
         self.gameWidth = game.GAME_WIDTH
         self.gameHeight = game.GAME_HEIGHT
         self.groundOffset = 55
+        self.game_over = False
         self.banana1 = game.LoadImage("bananas_1.png", item_size)
         self.banana3 = game.LoadImage("bananas_3.png", item_size)
         self.bomb = game.LoadImage("bomb.png", item_size)
@@ -25,37 +27,42 @@ class GameWorld(State):
         self.playerNum = 1
         self.players: list[Player] = []
         self.deadPlayers: list[Player] = []
-        self.players.append(
-            Player(
-                self.game, self.minion1, self.game.centerX - minion_size[0],
-                self.game.GAME_HEIGHT - minion_size[1] - self.groundOffset + 5,
-                minion_size, self.playerNum))
-        self.playerNum += 1
+        self.add_player()
         if multiplayer:
             self.itemsCount = 15
-            self.players.append(
-                Player(
-                    self.game, self.minion2,
-                    self.game.centerX + minion_size[0] / 2,
-                    self.game.GAME_HEIGHT - minion_size[1] -
-                    self.groundOffset + 5, minion_size, self.playerNum))
+            self.add_player()
         self.current_time: float = 0
 
         # array for bananas and bombs
         self.items: list[Item] = []
 
+    def add_player(self):
+        x = self.game.centerX - minion_size[0] - minion_size[0] / 2
+        image = self.minion1
+        if self.playerNum == 2:
+            x = self.game.centerX + minion_size[0] / 2
+            image = self.minion2
+        self.players.append(
+            Player(
+                self.game, image, x,
+                self.game.GAME_HEIGHT - minion_size[1] - self.groundOffset + 5,
+                minion_size, self.playerNum))
+        self.playerNum += 1
+
     def add_item(self):
+        if self.online:
+            return
         difficulty = (self.current_time / 15)
         type = randint(0, int(difficulty) + 5)
         if type < 3:
-            item = Item(self.game, self.banana1, 1, difficulty,
-                        item_size[0] * 0.68, item_size[1] * 0.78)
+            item = Item(self.gameWidth, self.gameHeight, self.banana1, 1,
+                        difficulty, item_size[0] * 0.68, item_size[1] * 0.78)
         elif type < 6:
-            item = Item(self.game, self.banana3, 3, difficulty,
-                        item_size[0] * 0.8, item_size[1] * 0.96)
+            item = Item(self.gameWidth, self.gameHeight, self.banana3, 3,
+                        difficulty, item_size[0] * 0.8, item_size[1] * 0.96)
         else:
-            item = Item(self.game, self.bomb, -1, difficulty,
-                        item_size[0] * 0.7, item_size[1] * 0.7)
+            item = Item(self.gameWidth, self.gameHeight, self.bomb, -1,
+                        difficulty, item_size[0] * 0.7, item_size[1] * 0.7)
         self.items.append(item)
 
     def update(self, delta_time, actions):
@@ -67,6 +74,11 @@ class GameWorld(State):
         # move player
         for player in self.players:
             player.update(delta_time, actions)
+            # check if player died
+            if player.lifes == 0:
+                player.deathTime = self.current_time
+                self.deadPlayers.append(player)
+                self.players.remove(player)
 
         # add items if too few
         if len(self.items) < self.itemsCount:
@@ -82,19 +94,16 @@ class GameWorld(State):
                     player.addScoreOrDamage(item.score)
                     if item in self.items:
                         self.items.remove(item)
-                    # check if player died
-                    if player.lifes == 0:
-                        player.deathTime = self.current_time
-                        self.deadPlayers.append(player)
-                        self.players.remove(player)
 
         # Game Over
         if not self.players:
+            self.game_over = True
             new_state = GameOver(self.game, self.deadPlayers)
             new_state.enter_state()
 
         # update time
-        self.current_time += delta_time
+        if not self.online:
+            self.current_time += delta_time
 
     def render(self, display):
         display.fill(SKY_BLUE)
@@ -131,3 +140,12 @@ class GameWorld(State):
                             x,
                             self.gameHeight - 2,
                             pivot=pivot)
+
+    def extract_player(self, playerNum: int):
+        for p in self.players:
+            if p.playerNum == playerNum:
+                return p
+
+        for p in self.deadPlayers:
+            if p.playerNum == playerNum:
+                return p
