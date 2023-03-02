@@ -2,7 +2,7 @@ import pygame, os
 from player import Player
 from states.state import State
 from input_box import InputBox
-from cosntants import *
+from constants import *
 
 
 class GameOver(State):

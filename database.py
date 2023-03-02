@@ -1,6 +1,6 @@
 import sqlite3  #imports entire Library. Use: sqlite3.XXXX
 from sqlite3 import Error  # imports a  member in our namespace. Usa directly
-from cosntants import *
+from constants import *
 
 
 class DatabaseSqlite():

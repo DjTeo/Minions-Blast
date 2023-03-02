@@ -1,7 +1,7 @@
 import pygame
 from pygame.rect import Rect
 from random import randint
-from cosntants import *
+from constants import *
 
 
 class Item():

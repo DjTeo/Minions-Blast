@@ -1,6 +1,6 @@
 import pygame
 from pygame.rect import Rect
-from cosntants import *
+from constants import *
 
 
 class Player():

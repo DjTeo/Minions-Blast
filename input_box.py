@@ -1,5 +1,5 @@
 import pygame
-from cosntants import *
+from constants import *
 
 class InputBox:
 
