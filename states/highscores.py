@@ -43,15 +43,6 @@ class Highscores(State):
         display.blit(self.highscores_SURF, self.highscores_RECT)
         display.blit(self.main_menu_SURF, self.main_menu_RECT)
 
-        self.game.draw_text(display, "Singleplayer", LIME,
-                            self.highscores_sp_x, 100, bold=True)
-        self.game.draw_text(display, "Multiplayer", YELLOW,
-                            self.highscores_mp_x, 100, bold=True)
-
-        self.display_highscsores(display, self.column_names, self.result_sp,
-                                 self.highscores_sp_x)
-        self.display_highscsores(display, self.column_names, self.result_mp,
-                                 self.highscores_mp_x)
 
         display.blit(self.banana1, (100, 250))
         display.blit(self.banana3,
@@ -59,6 +50,17 @@ class Highscores(State):
         display.blit(self.minion1, (100, 400))
         display.blit(self.minion2,
                      (self.gameWidth - self.minion2.get_width() - 100, 400))
+        
+        self.game.draw_text(display, "Singleplayer", LIME,
+                            self.highscores_sp_x, 100, bold=True)
+        self.game.draw_text(display, "Multiplayer", YELLOW,
+                            self.highscores_mp_x, 100, bold=True)
+
+        self.display_highscores(display, self.column_names, self.result_sp,
+                                 self.highscores_sp_x)
+        self.display_highscores(display, self.column_names, self.result_mp,
+                                 self.highscores_mp_x)
+
 
     def handle_event(self, event: pygame.event.Event):
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -71,7 +73,7 @@ class Highscores(State):
                 new_state = Highscores(self.game)
                 new_state.enter_state()
 
-    def display_highscsores(self, display, columns: list[str],
+    def display_highscores(self, display, columns: list[str],
                             results: list[any], x: int):
         for idx, col in enumerate(columns):
             offsetX = idx * 150
