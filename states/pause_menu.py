@@ -1,6 +1,6 @@
 import pygame, os
 from states.state import State
-from cosntants import *
+from constants import *
 
 class PauseMenu(State):
 

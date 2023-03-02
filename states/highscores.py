@@ -1,5 +1,5 @@
 from states.state import State
-from cosntants import *
+from constants import *
 from pygame.rect import Rect
 import pygame
 

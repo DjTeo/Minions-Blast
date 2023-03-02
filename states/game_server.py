@@ -2,7 +2,7 @@ import pygame
 from states.state import State
 from states.game_world import GameWorld
 from network_items import NetworkWorld, NetworkItem, NetworkPlayer
-from cosntants import *
+from constants import *
 from player import Player
 import pickle
 import socket

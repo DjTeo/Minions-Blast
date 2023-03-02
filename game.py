@@ -1,6 +1,6 @@
 import os, time, pygame
 from states.main_menu import MainMenu
-from cosntants import *
+from constants import *
 from database import DatabaseSqlite
 
 class Game():

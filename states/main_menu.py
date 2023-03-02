@@ -2,7 +2,7 @@ from states.state import State
 from states.game_world import GameWorld
 from states.highscores import Highscores
 from states.multiplayer_menu import MultiplayerMenu
-from cosntants import *
+from constants import *
 from pygame.rect import Rect
 import pygame
 

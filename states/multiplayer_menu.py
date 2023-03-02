@@ -2,7 +2,7 @@ from states.state import State
 from states.game_world import GameWorld
 from states.game_server import GameServer
 from states.game_client import GameClient
-from cosntants import *
+from constants import *
 from pygame.rect import Rect
 from input_box import InputBox
 import pygame
