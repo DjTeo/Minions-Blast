@@ -24,8 +24,6 @@ class GameOver(State):
                          PIVOT.center, f"P{player.playerNum}"))
 
     def update(self, delta_time, actions):
-        if actions[ACT.pause]:
-            self.exit_state()
         for input in self.inputs:
             input.update()
         self.game.reset_keys()
