@@ -24,9 +24,6 @@ class State():
     def exit_state(self):
         self.game.state_stack.pop()
 
-    def handle_event(self, event: pygame.event):
-        pass
-
     def draw_button_background(self, surface, button_light, button_dark,
                                button_rect):
         # get the scaled mouse

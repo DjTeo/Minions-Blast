@@ -44,13 +44,13 @@ class ACT(Enum):
     pause = 0
     left1 = 1
     right1 = 2
-    up1 = 3
-    down1 = 4
+    # up1 = 3
+    # down1 = 4
     jump1 = 5
     left2 = 6
     right2 = 7
-    up2 = 8
-    down2 = 9
+    # up2 = 8
+    # down2 = 9
     jump2 = 10
 
 

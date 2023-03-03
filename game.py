@@ -40,13 +40,9 @@ class Game():
             ACT.pause: False,
             ACT.left1: False,
             ACT.right1: False,
-            ACT.up1: False,
-            ACT.down1: False,
             ACT.jump1: False,
             ACT.left2: False,
             ACT.right2: False,
-            ACT.up2: False,
-            ACT.down2: False,
             ACT.jump2: False,
         }
         self.errors_update = 0  # count consecutive errors in update method
@@ -80,8 +76,6 @@ class Game():
                 if self.multiplayer:
                     if event.key == pygame.K_w:
                         self.actions[ACT.jump1] = True
-                    # elif event.key == pygame.K_s:
-                    #     self.actions[ACT.down1] = True
                     elif event.key ==  pygame.K_a:
                         self.actions[ACT.left1] = True
                     elif event.key ==  pygame.K_d:
@@ -90,8 +84,6 @@ class Game():
                         self.actions[ACT.jump1] = True
                     elif event.key == pygame.K_UP:
                         self.actions[ACT.jump2] = True
-                    # elif event.key == pygame.K_DOWN:
-                    #     self.actions[ACT.down2] = True
                     elif event.key ==  pygame.K_LEFT:
                         self.actions[ACT.left2] = True
                     elif event.key ==  pygame.K_RIGHT:
@@ -101,8 +93,6 @@ class Game():
                 else:
                     if event.key in (pygame.K_UP, pygame.K_w):
                         self.actions[ACT.jump1] = True
-                    # elif event.key in (pygame.K_DOWN, pygame.K_s):
-                    #     self.actions[ACT.down1] = True
                     elif event.key in (pygame.K_LEFT, pygame.K_a):
                         self.actions[ACT.left1] = True
                     elif event.key in (pygame.K_RIGHT, pygame.K_d):
@@ -113,8 +103,6 @@ class Game():
                 if self.multiplayer:
                     if event.key == pygame.K_w:
                         self.actions[ACT.jump1] = False
-                    # elif event.key == pygame.K_s:
-                    #     self.actions[ACT.down1] = False
                     elif event.key ==  pygame.K_a:
                         self.actions[ACT.left1] = False
                     elif event.key ==  pygame.K_d:
@@ -123,8 +111,6 @@ class Game():
                         self.actions[ACT.jump1] = False
                     elif event.key == pygame.K_UP:
                         self.actions[ACT.jump2] = False
-                    # elif event.key == pygame.K_DOWN:
-                    #     self.actions[ACT.down2] = False
                     elif event.key ==  pygame.K_LEFT:
                         self.actions[ACT.left2] = False
                     elif event.key ==  pygame.K_RIGHT:
@@ -134,8 +120,6 @@ class Game():
                 else:
                     if event.key in (pygame.K_UP, pygame.K_w):
                         self.actions[ACT.jump1] = False
-                    # elif event.key in (pygame.K_DOWN, pygame.K_s):
-                    #     self.actions[ACT.down1] = False
                     elif event.key in (pygame.K_LEFT, pygame.K_a):
                         self.actions[ACT.left1] = False
                     elif event.key in (pygame.K_RIGHT, pygame.K_d):
@@ -148,7 +132,7 @@ class Game():
         if pos is None:
             pos = pygame.mouse.get_pos()
 
-        # take the mouse position and scale it, too
+        # take the mouse position and scale it
         ratio_x = (self.screen.get_width() / self.GAME_WIDTH)
         ratio_y = (self.screen.get_height() / self.GAME_HEIGHT)
         posX = pos[0] / ratio_x
