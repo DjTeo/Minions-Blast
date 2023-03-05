@@ -8,15 +8,7 @@ class DatabaseSqlite():
     def __init__(self, path="mydatabase.sqlite"):
         self.connection = self.create_connection(path)
         # Create Table
-        self.execute_query("""
-CREATE TABLE IF NOT EXISTS highscores (
-id INTEGER PRIMARY KEY AUTOINCREMENT,
-name TEXT NOT NULL,
-score INTEGER,
-time INTEGER,
-multiplayer INTEGER
-);
-""")
+        self.execute_query("CREATE TABLE IF NOT EXISTS highscores (id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT NOT NULL,score INTEGER,time INTEGER,multiplayer INTEGER);")
 
     def create_connection(self, path):
         connection = None
