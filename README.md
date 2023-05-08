@@ -23,3 +23,6 @@
 
 ### Common Controls
 - Pause: Esc
+
+
+[![Gameplay Video](https://img.youtube.com/vi/FW4vwAjI8YM/0.jpg)](https://youtu.be/FW4vwAjI8YM)
